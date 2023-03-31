@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
+      <Compile Remove="Controllers\Test.cs" />
     </ItemGroup>
 
 </Project>

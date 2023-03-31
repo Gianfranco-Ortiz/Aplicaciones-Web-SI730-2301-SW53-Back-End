@@ -12,27 +12,27 @@ namespace API.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private  List<Student> students = new List<Student>();
 
-        // GET: api/Student
+        private static List<Student> studens = new List<Student>()
+        {
+            new Student() { Id = 1, Name = "Carlos" },
+            new Student() { Id = 2, Name = "Rubi" },
+            new Student() { Id = 3, Name = "Blanca" },
+            new Student() { Id = 4, Name = "Miguel" },
+        };
+
+    // GET: api/Student
         [HttpGet(Name = "GetStudent")]
         public IEnumerable<Student> Get()
         {
-            students.Add(new Student(){ Id=1,Name = "Estudiante a"});
-            students.Add(new Student(){ Id=2,Name = "Estudiante 2"});
-            return students;
+            return studens;
         }
 
         // GET: api/Student/5
         [HttpGet("{id}", Name = "Get")]
         public Student Get(int id)
         {
-            Student student = new Student();
-
-            student.Id = id;
-            student.Name = "student " + id;
-
-            return student;
+            return studens.Where(s => s.Id == id).First();
         }
 
         // POST: api/Student

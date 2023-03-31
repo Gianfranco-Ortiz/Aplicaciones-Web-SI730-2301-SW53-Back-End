@@ -13,7 +13,7 @@ namespace API.Controllers
     public class StudentController : ControllerBase
     {
 
-        private static List<Student> studens = new List<Student>()
+        private static List<Student> _students = new List<Student>()
         {
             new Student() { Id = 1, Name = "Carlos" },
             new Student() { Id = 2, Name = "Rubi" },
@@ -25,25 +25,40 @@ namespace API.Controllers
         [HttpGet(Name = "GetStudent")]
         public IEnumerable<Student> Get()
         {
-            return studens;
+            return _students;
         }
 
         // GET: api/Student/5
         [HttpGet("{id}", Name = "Get")]
         public Student Get(int id)
         {
-            return studens.Where(s => s.Id == id).First();
+            return _students.Where(s => s.Id == id).First();
         }
 
         // POST: api/Student
         [HttpPost]
         public IActionResult Post([FromBody] Student student)
         {
-            if (student.Id == 1)
+            try
             {
+                
+                if (student.Name == "") // Error Client
+                {
+                    return StatusCode(400);
+                }
+                else // Existoso
+                {
+                    
+                    //Conecta y graba
+                    throw new Exception("Error de base de datos");
+                    return StatusCode(201);
+                }
+            }
+            catch (Exception e) //Erro de servidor
+            {
+                //Loggear error
                 return StatusCode(500);
             }
-            else return StatusCode(201);
         }
 
         // PUT: api/Student/5

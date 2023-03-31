@@ -41,7 +41,6 @@ namespace API.Controllers
         {
             try
             {
-                
                 if (student.Name == "") // Error Client
                 {
                     return StatusCode(400);
